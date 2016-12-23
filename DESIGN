@@ -2,7 +2,6 @@ By Nancy Cao and Dorothy Ng
 
 Problem: Improve Github
    - Preventing merge conflicts in Github
-   - print last commit message???
    - improving git log clarity and formatting -> <commit id> - <commit msg> <(time commited)> - <user>
       ---- cmd: devlog
    
