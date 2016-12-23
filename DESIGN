@@ -1,14 +1,20 @@
 By Nancy Cao and Dorothy Ng
 
-Problem: Preventing merge conflicts in Github
-
+Problem: Improve Github
+   - Preventing merge conflicts in Github
+   - print last commit message???
+   - improving git log clarity and formatting -> <commit id> - <commit msg> <(time commited)> - <user>
+      ---- cmd: devlog
+   
 Description:
 
 Technical Design:
-Our own terminal <-- processes
-Only one user can use the terminal at a time (aka edit github files) <-- semaphores
-When user exits terminal, program will automatically add, commit, and push files to repo.
-get rid of git prefix
+  Our own terminal
+  Only one user can use the terminal at a time (aka edit github files)
+  When user exits terminal, program will automatically add, commit, and push files to repo.
+  get rid of git prefix
+
+Timeline:
 
 The names of the people in the group.
 A statement of the problem you are solving and/or a high level description of the project.
