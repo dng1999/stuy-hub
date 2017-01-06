@@ -34,7 +34,8 @@ Technical Design:
 Timeline:
 (By 1/9 - about 3 days) Create own terminal with basic functionality.
 	-Nancy & Dorothy
-(By 1/11 - about a week) Make it so that only one user can open the terminal at a time. Find a way to stop a user from directly accessing and modifying files.
+(By 1/11 - about a week) Make it so that only one user can open the terminal at a time.
+Find a way to stop a user from directly accessing and modifying files.
 	-Nancy & Dorothy
 (By 1/18 - about 1 day) Add the automatic git commands when opening and closing the terminal.
 	-Nancy
