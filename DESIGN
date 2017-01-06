@@ -1,26 +1,35 @@
 By Nancy Cao and Dorothy Ng
 
 Problem: Github
-Although Github is great, merge conflicts are an annoyance and frequent problem in group projects. Github’s commit history is also formatted messily, which prohibits users from understanding the changes made clearly and easily. Also, typing git add, commit, and push is a hassle that can be combined into one command.
+Although Github is great, merge conflicts are an annoyance and frequent problem in group projects.
+Github’s commit history is also formatted messily, which prohibits users from understanding the changes made
+clearly and easily. Also, typing git add, commit, and push is a hassle that can be combined into one command.
    
 Description: 
-Users will have to ssh into the same machine. It will be an executable that runs a terminal. However, only one user can use the terminal at a time to edit the files in a Github folder. It will have the same functionality as a regular terminal, but with added features such as automatically running git pull when the terminal is initially opened, and running git add *, git commit, and git push when the user uses exit <commit msg> to close the terminal. We currently need to figure out how to stop a user from directly accessing and modifying the files. In addition, git log will be modified to be more clear and easier to read with its own command: git devlog.
+Users will have to ssh into the same machine. It will be an executable that runs a terminal.
+However, only one user can use the terminal at a time to edit the files in a Github folder.
+It will have the same functionality as a regular terminal, but with added features such as automatically
+running git pull when the terminal is initially opened, and running git add *, git commit, and git push
+when the user uses exit <commit msg> to close the terminal. We currently need to figure out how to stop
+a user from directly accessing and modifying the files. In addition, git log will be modified to be more
+clear and easier to read with its own command: git devlog.
 
 Technical Design:
   Our own terminal
-cd, ls, git commands, git devlog, redirection, piping, and forking
-when user exits terminal, it will automatically add, commit, and push files to repo.
-git devlog will improve git log clarity and formatting 
-Format: <commit id> - <commit msg> <(time committed)> - <user>
-Relates to Project #1, when we coded our own terminal.
-Includes redirection and forking, in order to run commands.
+-cd, ls, git commands, git devlog, redirection, piping, and forking
+-when user exits terminal, it will automatically add, commit, and push files to repo.
+-git devlog will improve git log clarity and formatting 
+   Format: <commit id> - <commit msg> <(time committed)> - <user>
+-Relates to Project #1, when we coded our own terminal.
+-Includes redirection and forking, in order to run commands.
 
   Only one user can use the terminal at a time (aka edit github files)
-Uses semaphores, shared memory, and networking.
-The Github folder will be treated as shared memory.
-Semaphores will control which executable terminal can access and modify the contents of that folder.
-When user accesses the folder through the terminal, the semaphore will be taken. When the user exits the terminal, the semaphore will be released.
-Terminal will not run until the semaphore is above 0.
+-Uses semaphores, shared memory, and networking.
+-The Github folder will be treated as shared memory.
+-Semaphores will control which executable terminal can access and modify the contents of that folder.
+-When user accesses the folder through the terminal, the semaphore will be taken.
+ When the user exits the terminal, the semaphore will be released.
+-Terminal will not run until the semaphore is above 0.
 
 Timeline:
 (By 1/9 - about 3 days) Create own terminal with basic functionality.
