@@ -12,7 +12,7 @@
 void execRedirO(char **cmd){ // cmd > file
   char **command = (char **)calloc(10,10);
   char *file;
-  
+
   int ci = 0;
   int i = 0;
   int signPassed = 0;
@@ -35,10 +35,11 @@ void execRedirO(char **cmd){ // cmd > file
   execvp(command[0],command);
 }
 
-void execRedirI(char **cmd){ // cmd < file
+// REDIRECTION HERE
+void execRedirI(char **cmd){ // "cmd" "<" "file"
   char **command;
   char *file;
-  
+
   int ci = 0;
   int i = 0;
   int signPassed = 0;
@@ -102,6 +103,8 @@ void execPipe(char **cmd){
   }
 }
 
+//code below works
+
 void execCommand(char **cmd){
   if (strcmp(cmd[0],"exit") == 0){
     exit(0);
@@ -115,30 +118,30 @@ void execCommand(char **cmd){
     if (f==0){
       int i = 0;
       while (cmd[i]){
-	if (strcmp(cmd[i],">") == 0){
-	  special = ">";
-	}
-	else if (strcmp(cmd[i],"<") == 0){
-	  special = "<";
-	}
-	else if (strcmp(cmd[i],"|") == 0){
-	  special = "|";
-	}
-	i++;
-      }
-      
-      if (strcmp(special,">") == 0){
-	execRedirO(cmd);
-      }
-      else if (strcmp(special,"<") == 0){
-	execRedirI(cmd);
-      }
-      else if (strcmp(special,"|") == 0){
-	execPipe(cmd);
-      }
-      else{
-	execvp(cmd[0],cmd);
-      }
+	      if (strcmp(cmd[i],">") == 0){
+	          special = ">";
+        }
+	      else if (strcmp(cmd[i],"<") == 0){
+	         special = "<";
+	      }
+	      else if (strcmp(cmd[i],"|") == 0){
+	         special = "|";
+	      }
+	      i++;
+     }
+
+     if (strcmp(special,">") == 0){
+	      execRedirO(cmd);
+     }
+     else if (strcmp(special,"<") == 0){
+	      execRedirI(cmd);
+     }
+     else if (strcmp(special,"|") == 0){
+	      execPipe(cmd);
+     }
+     else{
+	      execvp(cmd[0],cmd);
+     }
     }
     else {
       int status;
