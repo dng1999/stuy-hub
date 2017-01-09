@@ -10,8 +10,8 @@ Problem: Github
 Although Github is great, merge conflicts are an annoyance and frequent problem in group projects.
 Github’s commit history is also formatted messily, which prohibits users from understanding the changes made
 clearly and easily. Also, typing git add, commit, and push is a hassle that can be combined into one command.
-   
-Description: 
+
+Description:
 Users will have to ssh into the same machine. It will be an executable that runs a terminal.
 However, only one user can use the terminal at a time to edit the files in a Github folder.
 It will have the same functionality as a regular terminal, but with added features such as automatically
@@ -24,10 +24,11 @@ Technical Design:
   Our own terminal
 -cd, ls, git commands, git devlog, redirection, piping, and forking
 -when user exits terminal, it will automatically add, commit, and push files to repo.
--git devlog will improve git log clarity and formatting 
+-git devlog will improve git log clarity and formatting
    Format: <commit id> - <commit msg> <(time committed)> - <user>
 -Relates to Project #1, when we coded our own terminal.
 -Includes redirection and forking, in order to run commands.
+-When user removes a file or folder, automatically do git delete
 
   Only one user can use the terminal at a time (aka edit github files)
 -Uses semaphores, shared memory, and networking.
@@ -38,13 +39,14 @@ Technical Design:
 -Terminal will not run until the semaphore is above 0.
 
 Timeline:
-(By 1/9 - about 3 days) Create own terminal with basic functionality.
-	-Nancy & Dorothy
-(By 1/11 - about a week) Make it so that only one user can open the terminal at a time.
+(By 1/11 - about 3 days) Create own terminal with basic functionality.
+  - redirection, piping
+	- Nancy & Dorothy
+(By 1/18 - about a week) Make it so that only one user can open the terminal at a time.
 Find a way to stop a user from directly accessing and modifying files.
 	-Nancy & Dorothy
-(By 1/18 - about 1 day) Add the automatic git commands when opening and closing the terminal.
+(By 1/19 - about 1 day) Add the automatic git commands when opening and closing the terminal and auto removing git files/folders
 	-Nancy
-(By 1/18 - about 1 day) Create git devlog.
+(By 1/19 - about 1 day) Create git devlog.
 	-Dorothy
 (By due date) Intense testing and debugging.
