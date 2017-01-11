@@ -1,3 +1,7 @@
 DEVLOG
 
 format: firstL -- TIMESTAMP\n
+
+Dorothy -- 1/11/2017 3:30 AM
+	wrote code for execPipe -> currently only tests to see if input is correct
+	      need to add calls to execRedir later
