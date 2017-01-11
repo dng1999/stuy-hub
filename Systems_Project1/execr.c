@@ -9,30 +9,35 @@
 
 #include "execr.h"
 
-void execRedirO(char **cmd){ // cmd > file
-  char **command = (char **)calloc(10,10);
-  char *file;
+int currentSTD_IN = 0;
+int currentSTD_OUT = 1;
 
-  int ci = 0;
-  int i = 0;
-  int signPassed = 0;
-  while(cmd[i]){
-    if (!signPassed){
-      command[ci] = cmd[i];
-      ci++;
-    }
-    else if (strcmp(cmd[i],">") == 0){
-      signPassed = 1;
-    }
-    else {
-      file = cmd[i];
-    }
-    i++;
+void resetFileTable(in, out) {
+  if (in != 0) {
+    in_fd = open(in, 0_RDONLY);
+    dup2(in_fd, 0);
+    close(in_fd);
   }
-  int filed = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-  dup2(filed,STDOUT_FILENO);
-  close(filed);
-  execvp(command[0],command);
+  if (out != 1){
+    out_fd = open(out, 0_RDONLY);
+    dup2(out, 1)
+    close(out_fd);
+  }
+}
+
+void execRedirO(char **cmd){ // cmd > file
+  char *in = cmd[0];
+  char *out = cmd[2];
+
+  int in_fd = open(in , O_RDONLY);
+  dup2(in_fd , STDIN_FILENO);
+  close(in_fd);
+
+  int out_fd = open(out, O_WRONLY|O_CREAT, 0666);
+  dup2(out_fd , STDOUT_FILENO);
+  close(out_fd);
+
+  execvp(cmd[0], cmd);
 }
 
 // REDIRECTION HERE
@@ -142,6 +147,7 @@ void execCommand(char **cmd){
      else{
 	      execvp(cmd[0],cmd);
      }
+     //resetFileTable(currentSTD_IN, currentSTD_OUT);
     }
     else {
       int status;
