@@ -14,13 +14,13 @@ int currentSTD_OUT = 1;
 
 void resetFileTable(in, out) {
   if (in != 0) {
-    in_fd = open(in, 0_RDONLY);
+    int in_fd = open("STDIN", O_RDONLY);
     dup2(in_fd, 0);
     close(in_fd);
   }
   if (out != 1){
-    out_fd = open(out, 0_RDONLY);
-    dup2(out, 1)
+    int out_fd = open("STDOUT", O_RDONLY);
+    dup2(out_fd, 1);
     close(out_fd);
   }
 }
