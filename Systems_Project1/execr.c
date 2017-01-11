@@ -99,17 +99,17 @@ void execPipe(char **cmd){
     else {
       if (i){
 	strcpy(tempCmd,command1);
-	strcat(tempCmd," > .tmp");
+	strcat(tempCmd," > .tmpy");
 	printf("%s",tempCmd);
       }
       else {
 	strcpy(tempCmd,command1);
-        strcat(tempCmd," < .tmp");
+        strcat(tempCmd," < .tmpy");
 	printf("%s",tempCmd);
       }
       exit(0);
     }
-    execlp("rm","rm",".tmp",NULL);
+    execlp("rm","rm",".tmpy",NULL);
   }
 }
 
