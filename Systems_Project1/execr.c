@@ -41,7 +41,7 @@ void execRedirO(char **cmd){ // cmd > file
 }
 
 // REDIRECTION HERE
-void execRedirI(char **cmd){ // "cmd" "<" "file"
+void execRedirI(char **cmd){ // input:"command < file"
   char **command;
   char *file;
 
@@ -70,6 +70,7 @@ void execRedirI(char **cmd){ // "cmd" "<" "file"
 void execPipe(char **cmd){
   char **command1;
   char **command2;
+  char tempCmd[30];
 
   int ci = 0;
   int fi = 0;
@@ -89,22 +90,26 @@ void execPipe(char **cmd){
     }
     i++;
   }
-  int out = dup(STDOUT_FILENO);
-  int in = dup(STDIN_FILENO);
-  int fd[2];
-  pipe(fd);
-  int f = fork();
-  int status;
-  if (f == 0){
-    dup2(fd[0],STDOUT_FILENO);
-    close(fd[0]);
-    execvp(command1[0],command1);
-  }
-  else{
-    wait(&status);
-    dup2(fd[1],STDIN_FILENO);
-    close(fd[1]);
-    execvp(command2[2],command2);
+  i = 2;
+  while(i){
+    int f = fork();
+    if (f){
+      wait(0);
+    }
+    else {
+      if (i){
+	strcpy(tempCmd,command1);
+	strcat(tempCmd," > .tmp");
+	printf("%s",tempCmd);
+      }
+      else {
+	strcpy(tempCmd,command1);
+        strcat(tempCmd," < .tmp");
+	printf("%s",tempCmd);
+      }
+      exit(0);
+    }
+    execlp("rm","rm",".tmp",NULL);
   }
 }
 
