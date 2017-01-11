@@ -28,16 +28,17 @@ void resetFileTable(in, out) {
 void execRedirO(char **cmd){ // cmd > file
   char *in = cmd[0];
   char *out = cmd[2];
-
-  int in_fd = open(in , O_RDONLY);
-  dup2(in_fd , STDIN_FILENO);
-  close(in_fd);
-
-  int out_fd = open(out, O_WRONLY|O_CREAT, 0666);
-  dup2(out_fd , STDOUT_FILENO);
+  printf("in: %s\n", in);
+  printf("out: %s\n", out);
+  int out_fd = open(out, O_CREAT | O_WRONLY, 0644);
+  printf("out_fd: %d\n", out_fd);
+  int stdout = dup(stdout);
+  printf("stdout: %d\n", STDOUT_FILENO);
+  dup2(out_fd, stdout);
+  //printf("new out_fd: %d\n", out_fd);
+  //printf("new stdout: %d\n", stdout);
+  execvp(cmd[0], (char **)cmd[0]);
   close(out_fd);
-
-  execvp(cmd[0], cmd);
 }
 
 // REDIRECTION HERE
@@ -66,7 +67,7 @@ void execRedirI(char **cmd){ // input:"command < file"
   close(filed);
   execvp(command[0],command);
 }
-
+/*
 void execPipe(char **cmd){
   char **command1;
   char **command2;
@@ -112,10 +113,11 @@ void execPipe(char **cmd){
     execlp("rm","rm",".tmpy",NULL);
   }
 }
-
+*/
 //code below works
 
 void execCommand(char **cmd){
+  //printf("testing \n");
   if (strcmp(cmd[0],"exit") == 0){
     exit(0);
   }
@@ -126,6 +128,7 @@ void execCommand(char **cmd){
     int f = fork();
     char *special = "null";
     if (f==0){
+      //printf("forked\n");
       int i = 0;
       while (cmd[i]){
 	      if (strcmp(cmd[i],">") == 0){
@@ -141,15 +144,17 @@ void execCommand(char **cmd){
      }
 
      if (strcmp(special,">") == 0){
+       //printf("> detected\n");
 	      execRedirO(cmd);
      }
      else if (strcmp(special,"<") == 0){
 	      execRedirI(cmd);
      }
      else if (strcmp(special,"|") == 0){
-	      execPipe(cmd);
+	      //execPipe(cmd);
      }
      else{
+       printf("no special symbols\n");
 	      execvp(cmd[0],cmd);
      }
      //resetFileTable(currentSTD_IN, currentSTD_OUT);
