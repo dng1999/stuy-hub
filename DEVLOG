@@ -4,13 +4,14 @@ format: firstL -- TIMESTAMP\n
 
 1/11/17
 
-Dorothy -- 3:30 AM
+dorothyN -- 3:30 AM
 	wrote code for execPipe -> currently only tests to see if input is correct
 		need to add calls to execRedir later
 	      
-Dorothy -- 9:00 PM
+dorothyN -- 9:00 PM
 	fixed execPipe
 		still need to add calls to execRedir later (they're commented out until execRedir is working)
+		(added at 12 PM) fix yo pipe
 
 nancyC -- 10:14 PM
        > redirection works
