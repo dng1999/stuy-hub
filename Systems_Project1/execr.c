@@ -137,7 +137,7 @@ void execCommand(char **cmd){
         dup2(newIn, STDIN_FILENO);
       }
       else if (strcmp(special,"|") == 0){
-        printf("run execPipe\n");
+        //printf("run execPipe\n");
         execPipe(cmd);
       }
       else{
