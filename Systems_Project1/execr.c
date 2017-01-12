@@ -36,11 +36,11 @@ int execRedirI(char **cmd){ // input:"command < file"
   //printf("in: %s\n", in);
   //printf("out: %s\n", out);
   int newIn = dup(STDIN_FILENO);
-  //printf("%d\n", newIn);
+  //printf("dupIn: %d\n", newIn);
   int in_fd = open(in, O_RDONLY , 0644);
-  //printf("out_fd: %d\n", out_fd);
-  int res = dup2(in_fd, STDIN_FILENO);
-  //printf("%d\n", res);
+  //printf("in_fd: %d\n", in_fd);
+  dup2(in_fd, STDIN_FILENO);
+  //printf("newIN: %d\n", res);
   char **command;
   command[0] = cmd[0];
   command[1] = NULL;
