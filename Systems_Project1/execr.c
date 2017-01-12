@@ -45,7 +45,7 @@ void execRedirO(char **cmd){ // cmd > file
 void execRedirI(char **cmd){ // input:"command < file"
   char **command;
   char *file;
-
+  
   int ci = 0;
   int i = 0;
   int signPassed = 0;
@@ -67,53 +67,53 @@ void execRedirI(char **cmd){ // input:"command < file"
   close(filed);
   execvp(command[0],command);
 }
-/*
-void execPipe(char **cmd){
-  char **command1;
-  char **command2;
-  char tempCmd[30];
 
+void execPipe(char **cmd){
+  //printf("running execPipe\n");
+  char *command1[50];
+  char *command2[50];
+  
   int ci = 0;
   int fi = 0;
   int i = 0;
   int signPassed = 0;
   while(cmd[i]){
-    if (!signPassed){
+    //printf("running parser loop\n");
+    if (strcmp(cmd[i],"|") == 0){
+      //printf("ran by pipe\n");
+      signPassed = 1;
+    }
+    else if (!signPassed){
+      //printf("running by command1\n");
       command1[ci] = cmd[i];
       ci++;
     }
-    else if (strcmp(cmd[i],"|") == 0){
-      signPassed = 1;
-    }
     else {
+      //printf("running by command2\n");
       command2[fi] = cmd[i];
       fi++;
     }
     i++;
   }
-  i = 2;
-  while(i){
-    int f = fork();
-    if (f){
-      wait(0);
-    }
-    else {
-      if (i){
-	strcpy(tempCmd,command1);
-	strcat(tempCmd," > .tmpy");
-	printf("%s",tempCmd);
-      }
-      else {
-	strcpy(tempCmd,command1);
-        strcat(tempCmd," < .tmpy");
-	printf("%s",tempCmd);
-      }
-      exit(0);
-    }
-    execlp("rm","rm",".tmpy",NULL);
-  }
+  //printf("running execution\n");
+  //printf("running command1\n");
+  command1[ci] = ">";
+  command1[ci+1] = ".tmpy";
+  command1[ci+2] = NULL;
+  //execRedirO(command1);
+  printf("execRedirO(command1);\n");
+
+  //printf("running command2\n");
+  command2[fi] = "<";
+  command2[fi+1] = ".tmpy";
+  command2[fi+2] = NULL;  
+  //execRedirI(command2);
+  printf("execRedirI(command2);\n");
+
+  //execlp("rm","rm",".tmpy",NULL);
+  printf("execlp(rm,rm,.tmpy,NULL);\n");
 }
-*/
+
 //code below works
 
 void execCommand(char **cmd){
@@ -128,36 +128,40 @@ void execCommand(char **cmd){
     int f = fork();
     char *special = "null";
     if (f==0){
-      //printf("forked\n");
+      printf("forked\n");
       int i = 0;
       while (cmd[i]){
-	      if (strcmp(cmd[i],">") == 0){
-	          special = ">";
+	if (strcmp(cmd[i],">") == 0){
+	  printf("found >\n");
+	  special = ">";
         }
-	      else if (strcmp(cmd[i],"<") == 0){
-	         special = "<";
-	      }
-	      else if (strcmp(cmd[i],"|") == 0){
-	         special = "|";
-	      }
-	      i++;
-     }
-
-     if (strcmp(special,">") == 0){
-       //printf("> detected\n");
-	      execRedirO(cmd);
-     }
-     else if (strcmp(special,"<") == 0){
-	      execRedirI(cmd);
-     }
-     else if (strcmp(special,"|") == 0){
-	      //execPipe(cmd);
-     }
-     else{
-       printf("no special symbols\n");
+	else if (strcmp(cmd[i],"<") == 0){
+	  printf("found <\n");
+	  special = "<";
+	}
+	else if (strcmp(cmd[i],"|") == 0){
+	  printf("found pipe\n");
+	  special = "|";
+	}
+	i++;
+      }
+      
+      if (strcmp(special,">") == 0){
+	//printf("> detected\n");
+	execRedirO(cmd);
+      }
+      else if (strcmp(special,"<") == 0){
+	execRedirI(cmd);
+      }
+      else if (strcmp(special,"|") == 0){
+	printf("run execPipe\n");
+	execPipe(cmd);
+      }
+      else{
+	printf("no special symbols\n");
 	      execvp(cmd[0],cmd);
-     }
-     //resetFileTable(currentSTD_IN, currentSTD_OUT);
+      }
+      //resetFileTable(currentSTD_IN, currentSTD_OUT);
     }
     else {
       int status;
