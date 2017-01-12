@@ -12,67 +12,48 @@
 int currentSTD_IN = 0;
 int currentSTD_OUT = 1;
 
-void resetFileTable(in, out) {
-  if (in != 0) {
-    int in_fd = open("STDIN", O_RDONLY);
-    dup2(in_fd, 0);
-    close(in_fd);
-  }
-  if (out != 1){
-    int out_fd = open("STDOUT", O_RDONLY);
-    dup2(out_fd, 1);
-    close(out_fd);
-  }
-}
 
-void execRedirO(char **cmd){ // cmd > file
-  char *in = cmd[0];
+int execRedirO(char **cmd){ // cmd > file
   char *out = cmd[2];
-  printf("in: %s\n", in);
-  printf("out: %s\n", out);
-  int out_fd = open(out, O_CREAT | O_WRONLY, 0644);
-  printf("out_fd: %d\n", out_fd);
-  int stdout = dup(stdout);
-  printf("stdout: %d\n", STDOUT_FILENO);
-  dup2(out_fd, stdout);
-  //printf("new out_fd: %d\n", out_fd);
-  //printf("new stdout: %d\n", stdout);
-  execvp(cmd[0], (char **)cmd[0]);
+  //printf("in: %s\n", in);
+  //printf("out: %s\n", out);
+  int newOut = dup(STDOUT_FILENO);
+  //printf("%d\n", newOut);
+  int out_fd = open(out, O_CREAT | O_TRUNC | O_WRONLY , 0644);
+  //printf("out_fd: %d\n", out_fd);
+  dup2(out_fd, STDOUT_FILENO);
+  char **command;
+  command[0] = cmd[0];
+  command[1] = NULL;
+  execvp(cmd[0], command);
   close(out_fd);
+  return newOut;
 }
 
 // REDIRECTION HERE
-void execRedirI(char **cmd){ // input:"command < file"
+int execRedirI(char **cmd){ // input:"command < file"
+  char *in = cmd[2];
+  //printf("in: %s\n", in);
+  //printf("out: %s\n", out);
+  int newIn = dup(STDIN_FILENO);
+  //printf("%d\n", newIn);
+  int in_fd = open(in, O_RDONLY , 0644);
+  //printf("out_fd: %d\n", out_fd);
+  int res = dup2(in_fd, STDIN_FILENO);
+  //printf("%d\n", res);
   char **command;
-  char *file;
-  
-  int ci = 0;
-  int i = 0;
-  int signPassed = 0;
-  while(cmd[i]){
-    if (!signPassed){
-      command[ci] = cmd[i];
-      ci++;
-    }
-    else if (strcmp(cmd[i],"<") == 0){
-      signPassed = 1;
-    }
-    else {
-      file = cmd[i];
-    }
-    i++;
-  }
-  int filed = open(file, O_RDONLY, 0644);
-  dup2(filed,STDIN_FILENO);
-  close(filed);
-  execvp(command[0],command);
+  command[0] = cmd[0];
+  command[1] = NULL;
+  execvp(cmd[0], command);
+  close(in_fd);
+  return newIn;
 }
 
 void execPipe(char **cmd){
   //printf("running execPipe\n");
   char *command1[50];
   char *command2[50];
-  
+
   int ci = 0;
   int fi = 0;
   int i = 0;
@@ -106,7 +87,7 @@ void execPipe(char **cmd){
   //printf("running command2\n");
   command2[fi] = "<";
   command2[fi+1] = ".tmpy";
-  command2[fi+2] = NULL;  
+  command2[fi+2] = NULL;
   //execRedirI(command2);
   printf("execRedirI(command2);\n");
 
@@ -128,38 +109,40 @@ void execCommand(char **cmd){
     int f = fork();
     char *special = "null";
     if (f==0){
-      printf("forked\n");
+      //printf("forked\n");
       int i = 0;
       while (cmd[i]){
-	if (strcmp(cmd[i],">") == 0){
-	  printf("found >\n");
-	  special = ">";
+        if (strcmp(cmd[i],">") == 0){
+          //printf("found >\n");
+          special = ">";
         }
-	else if (strcmp(cmd[i],"<") == 0){
-	  printf("found <\n");
-	  special = "<";
-	}
-	else if (strcmp(cmd[i],"|") == 0){
-	  printf("found pipe\n");
-	  special = "|";
-	}
-	i++;
+        else if (strcmp(cmd[i],"<") == 0){
+          //printf("found <\n");
+          special = "<";
+        }
+        else if (strcmp(cmd[i],"|") == 0){
+          //printf("found pipe\n");
+          special = "|";
+        }
+        i++;
       }
-      
+
       if (strcmp(special,">") == 0){
-	//printf("> detected\n");
-	execRedirO(cmd);
+        //printf("> detected\n");
+        int newOut = execRedirO(cmd);
+        dup2(newOut, STDOUT_FILENO);
       }
       else if (strcmp(special,"<") == 0){
-	execRedirI(cmd);
+        int newIn = execRedirI(cmd);
+        dup2(newIn, STDIN_FILENO);
       }
       else if (strcmp(special,"|") == 0){
-	printf("run execPipe\n");
-	execPipe(cmd);
+        printf("run execPipe\n");
+        execPipe(cmd);
       }
       else{
-	printf("no special symbols\n");
-	      execvp(cmd[0],cmd);
+        //printf("no special symbols\n");
+        execvp(cmd[0],cmd);
       }
       //resetFileTable(currentSTD_IN, currentSTD_OUT);
     }
