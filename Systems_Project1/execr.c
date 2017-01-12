@@ -81,18 +81,18 @@ void execPipe(char **cmd){
   command1[ci] = ">";
   command1[ci+1] = ".tmpy";
   command1[ci+2] = NULL;
-  //execRedirO(command1);
-  printf("execRedirO(command1);\n");
+  execRedirO(command1);
+  //printf("execRedirO(command1);\n");
 
   //printf("running command2\n");
   command2[fi] = "<";
   command2[fi+1] = ".tmpy";
   command2[fi+2] = NULL;
-  //execRedirI(command2);
-  printf("execRedirI(command2);\n");
+  execRedirI(command2);
+  //printf("execRedirI(command2);\n");
 
-  //execlp("rm","rm",".tmpy",NULL);
-  printf("execlp(rm,rm,.tmpy,NULL);\n");
+  execlp("rm","rm",".tmpy",NULL);
+  //printf("execlp(rm,rm,.tmpy,NULL);\n");
 }
 
 //code below works
