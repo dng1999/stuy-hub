@@ -77,22 +77,34 @@ void execPipe(char **cmd){
     i++;
   }
   //printf("running execution\n");
-  //printf("running command1\n");
-  command1[ci] = ">";
-  command1[ci+1] = ".tmpy";
-  command1[ci+2] = NULL;
-  execRedirO(command1);
-  //printf("execRedirO(command1);\n");
-
-  //printf("running command2\n");
-  command2[fi] = "<";
-  command2[fi+1] = ".tmpy";
-  command2[fi+2] = NULL;
-  execRedirI(command2);
-  //printf("execRedirI(command2);\n");
-
-  execlp("rm","rm",".tmpy",NULL);
-  //printf("execlp(rm,rm,.tmpy,NULL);\n");
+  int f = fork();
+  if (f==0){
+    //printf("running command1\n");
+    command1[ci] = ">";
+    command1[ci+1] = "tmpy";
+    command1[ci+2] = NULL;
+    execRedirO(command1);
+    //printf("execRedirO(command1);\n");
+  }
+  else{
+    int status;
+    wait(&status);
+    //printf("running command2\n");
+    command2[fi] = "<";
+    command2[fi+1] = "tmpy";
+    command2[fi+2] = NULL;
+    int f2 = fork();
+    if (f2 == 0){
+      execRedirI(command2);
+      //printf("execRedirI(command2);\n");
+    }
+    else {
+      int status;
+      wait(&status);
+      execlp("rm","rm","tmpy",NULL);
+      //printf("execlp(rm,rm,.tmpy,NULL);\n");
+    }
+  }
 }
 
 //code below works

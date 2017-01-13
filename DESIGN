@@ -50,3 +50,6 @@ Find a way to stop a user from directly accessing and modifying files.
 (By 1/19 - about 1 day) Create git devlog.
 	-Dorothy
 (By due date) Intense testing and debugging.
+
+1. Server exec file creates semaphore(can you use the client?)
+2. Client will be the shell
