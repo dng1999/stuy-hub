@@ -2,7 +2,7 @@ DEVLOG
 
 format: firstL -- TIMESTAMP\n
 
-1/11/17
+>>1/11/17
 
 dorothyN -- 3:30 AM
 	wrote code for execPipe -> currently only tests to see if input is correct
@@ -11,7 +11,6 @@ dorothyN -- 3:30 AM
 dorothyN -- 9:00 PM
 	fixed execPipe
 		still need to add calls to execRedir later (they're commented out until execRedir is working)
-		(added at 12 PM) fix yo pipe
 
 nancyC -- 10:14 PM
        > redirection works
@@ -20,3 +19,8 @@ nancyC -- 10:14 PM
 nancyC -- 11:23 PM
        < redirection works
        will do further test cases
+
+>>1/13/17
+
+dorothyN -- 11:43 AM
+	 actually fixed execPipe this time and will run on Mac OS. Not Linux. ???
