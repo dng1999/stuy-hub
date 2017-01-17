@@ -139,7 +139,12 @@ void execCommand(char **cmd){
         i++;
       }
 
-      if (strcmp(special,">") == 0){
+      if ((strcmp(cmd[0],"git") == 0) && (strcmp(cmd[1],"lazy") == 0)) {
+        system("git add .");
+        system("git commit -m \"test\"");
+        system("git push");
+      }
+      else if (strcmp(special,">") == 0){
         //printf("> detected\n");
         int newOut = execRedirO(cmd);
         dup2(newOut, STDOUT_FILENO);
