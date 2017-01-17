@@ -138,13 +138,18 @@ void execCommand(char **cmd){
         }
         i++;
       }
-
+      // git add -> git commit -> git push in one go!
       if ((strcmp(cmd[0],"git") == 0) && (strcmp(cmd[1],"lazy") == 0)) {
         system("git add .");
-        char commit[100] = "git commit -m \"";
-        strcat(commit, cmd[2]);
-        strcat(commit, "\"");
-        system(commit);
+        if (cmd[2] == NULL) { // commit message exists
+          system("git commit -m \"lazy commit\"");
+        }
+        else { // commit message doesn't exist
+          char commit[100] = "git commit -m \"";
+          strcat(commit, cmd[2]);
+          strcat(commit, "\"");
+          system(commit);
+        }
         system("git push");
       }
       else if (strcmp(special,">") == 0){
