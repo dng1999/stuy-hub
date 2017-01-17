@@ -115,7 +115,7 @@ void execCommand(char **cmd){
     exit(0);
   }
   else if (strcmp(cmd[0],"cd") == 0){
-    chdir(cmd[1]);
+    chdir(cmd[1]); // exit() gets buggy when you cd
   }
   else {
     int f = fork();

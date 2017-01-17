@@ -30,3 +30,4 @@ dorothyN -- 11:43 AM
 nancyC -- 11:01 PM
 	coded "git lazy <commit msg>" command that git add . -> git commit -m <commit msg> -> git push in one step
 	must relearn/refresh knowledge on semaphores..
+	now works with and without commit message input from user!

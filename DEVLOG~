@@ -24,3 +24,9 @@ nancyC -- 11:23 PM
 
 dorothyN -- 11:43 AM
 	 actually fixed execPipe this time and will run on Mac OS. Not Linux. ???
+
+>>1/16/16 
+
+nancyC -- 11:01 PM
+	coded "git lazy <commit msg>" command that git add . -> git commit -m <commit msg> -> git push in one step
+	must relearn/refresh knowledge on semaphores..
