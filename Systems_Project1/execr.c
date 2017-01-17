@@ -141,7 +141,10 @@ void execCommand(char **cmd){
 
       if ((strcmp(cmd[0],"git") == 0) && (strcmp(cmd[1],"lazy") == 0)) {
         system("git add .");
-        system("git commit -m \"test\"");
+        char commit[100] = "git commit -m \"";
+        strcat(commit, cmd[2]);
+        strcat(commit, "\"");
+        system(commit);
         system("git push");
       }
       else if (strcmp(special,">") == 0){
