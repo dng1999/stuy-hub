@@ -19,10 +19,10 @@ int execRedirO(char **cmd){ // cmd > file
   //printf("out: %s\n", out);
   int newOut = dup(STDOUT_FILENO);
   //printf("%d\n", newOut);
-  int out_fd = open(out, O_CREAT | O_TRUNC | O_WRONLY , 0644);
+  int out_fd = open(out, O_CREAT | O_TRUNC | O_WRONLY , 0666);
   //printf("out_fd: %d\n", out_fd);
   dup2(out_fd, STDOUT_FILENO);
-  char **command;
+  char *command[50];
   command[0] = cmd[0];
   command[1] = NULL;
   execvp(cmd[0], command);
@@ -41,7 +41,7 @@ int execRedirI(char **cmd){ // input:"command < file"
   //printf("in_fd: %d\n", in_fd);
   dup2(in_fd, STDIN_FILENO);
   //printf("newIN: %d\n", res);
-  char **command;
+  char *command[50];
   command[0] = cmd[0];
   command[1] = NULL;
   execvp(cmd[0], command);
@@ -102,7 +102,7 @@ void execPipe(char **cmd){
       int status;
       wait(&status);
       execlp("rm","rm","tmpy",NULL);
-      //printf("execlp(rm,rm,.tmpy,NULL);\n");
+      //printf("execlp(rm,rm,tmpy,NULL);\n");
     }
   }
 }
