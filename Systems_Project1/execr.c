@@ -12,7 +12,6 @@
 int currentSTD_IN = 0;
 int currentSTD_OUT = 1;
 
-
 int execRedirO(char **cmd){ // cmd > file
   char *out = cmd[2];
   //printf("in: %s\n", in);
@@ -110,7 +109,6 @@ void execPipe(char **cmd){
 //code below works
 
 void execCommand(char **cmd){
-  //printf("testing \n");
   if (strcmp(cmd[0],"exit") == 0){
     exit(0);
   }
@@ -151,6 +149,9 @@ void execCommand(char **cmd){
           system(commit);
         }
         system("git push");
+      }
+      else if ((strcmp(cmd[0],"git") == 0) && (strcmp(cmd[1],"log") == 0)) {
+        system("git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\"");
       }
       else if (strcmp(special,">") == 0){
         //printf("> detected\n");
