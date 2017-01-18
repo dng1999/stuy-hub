@@ -47,3 +47,4 @@ nancyC -- 12:08 PM
        fixed double exit bug
        git log is now reformatted to be clearer
        clear terminal when server or client is run
+       added signal handling for Ctrl+C
