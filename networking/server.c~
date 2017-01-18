@@ -10,7 +10,7 @@ void run_server( int sd );
 
 int main() {
   system("clear");
-  printf("[server] running\n");
+  printf("[server] runnning\n");
   int sd, connection;
 
   sd = server_setup();

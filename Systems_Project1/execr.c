@@ -175,6 +175,7 @@ void execCommand(char **cmd){
     else {
       int status;
       wait(&status);
+      exit(0);
     }
   }
 }

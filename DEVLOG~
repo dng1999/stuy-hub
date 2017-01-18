@@ -43,7 +43,3 @@ dorothyN -- 8:37 AM
 	 modified networking code to only accept one connection at a time
 	 issue: server shuts down when client shuts down
 	 	server has to be rerun after every session
-nancyC -- 12:08 PM 
-       fixed double exit bug
-       git log is now reformatted to be clearer
-       clear terminal when server or client is run
