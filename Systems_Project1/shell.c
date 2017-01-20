@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-
+#include <signal.h>
 #include "parser.h"
 #include "execr.h"
 
@@ -16,6 +16,7 @@ static void sighandler (int signo) {
 
 int main(){
   //printf("%s\n", "test");
+
   signal(SIGINT, sighandler);
 
   char input[512];
