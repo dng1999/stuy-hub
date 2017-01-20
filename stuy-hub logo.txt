@@ -1,11 +1,9 @@
-
-           o                              8                 8      
-           8                              8                 8      
- oPYo     o8P   o    o   o    o           8oPYo    o    o   8oPYo  
-Yb         8    8    8   8    8   ooooo   8    8   8    8   8    8 
-  'Yb      8    8    8   8    8           8    8   8    8   8    8 
-`YooP'     8    `YooP'   `YooP8           8    8   `YooP'   `YooP' 
-                              8
-			      8
-			  8888' 		                                                                
-                                                                                                                                   
+printf("           o                              8                 8\n");
+printf("           8                              8                 8\n");
+printf(" oPYo    oo8oo  o    o   o    o           8oPYo    o    o   8oPYo\n");
+printf("Yb         8    8    8   8    8   ooooo   8    8   8    8   8    8\n");
+printf("  'Yb      8    8    8   8    8           8    8   8    8   8    8\n");
+printf("`YooP'     8    `YooP'   `YooP8           8    8   `YooP'   `YooP'\n");
+printf("                              8\n");
+printf("			                        8\n");
+printf("		                   	  8888'\n");
