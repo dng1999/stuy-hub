@@ -29,9 +29,13 @@ int main( int argc, char *argv[] ) {
     printf("%s\n",buffer);
     write (sd, buffer, sizeof(buffer));
     exit(0);
-  } 
+  }
+
+  char cwd[512];
+  
   while (1) {
-    printf("enter message: ");
+    getcwd(cwd,sizeof(cwd));
+    printf("%s$ ",cwd);
     fgets( buffer, sizeof(buffer), stdin );
     char *p = strchr(buffer, '\n');
     *p = 0;

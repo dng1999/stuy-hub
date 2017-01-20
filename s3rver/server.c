@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 
+#include "parser.h"
+#include "execr.h"
 #include "networking.h"
 
 void process( char * s );
@@ -73,12 +75,8 @@ void sub_server( int sd ) {
   
 }
 void process( char * s ) {
-
   while ( *s ) {
-    /*if (s == "exit"){
-      shmdt(shmid, NULL, 0);
-      }*/
-    *s = (*s - 'a' + 13) % 26 + 'a';
-    s++;
+    char ***cmd = parseInput(s);
+    execInput(cmd);
   }
 }
