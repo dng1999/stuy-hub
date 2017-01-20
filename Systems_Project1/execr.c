@@ -12,6 +12,7 @@
 int currentSTD_IN = 0;
 int currentSTD_OUT = 1;
 
+// >
 int execRedirO(char **cmd){ // cmd > file
   char *out = cmd[2];
   //printf("in: %s\n", in);
@@ -29,8 +30,9 @@ int execRedirO(char **cmd){ // cmd > file
   return newOut;
 }
 
+// <
 // REDIRECTION HERE
-int execRedirI(char **cmd){ // input:"command < file"
+int execRedir1(char **cmd){ // input:"command < file"
   char *in = cmd[2];
   //printf("in: %s\n", in);
   //printf("out: %s\n", out);
@@ -94,7 +96,7 @@ void execPipe(char **cmd){
     command2[fi+2] = NULL;
     int f2 = fork();
     if (f2 == 0){
-      execRedirI(command2);
+      execRedir1(command2);
       //printf("execRedirI(command2);\n");
     }
     else {
@@ -107,20 +109,24 @@ void execPipe(char **cmd){
 }
 
 //code below works
+int doubleExit = 0;
 
 void execCommand(char **cmd){
   if (strcmp(cmd[0],"exit") == 0){
+    //printf("%s\n", "exit #1");
     exit(0);
   }
   else if (strcmp(cmd[0],"cd") == 0){
-    chdir(cmd[1]); // exit() gets buggy when you cd
+    chdir(cmd[1]);
   }
   else {
     int f = fork();
+    //printf("forked\n");
     char *special = "null";
     if (f==0){
-      //printf("forked\n");
+      //printf("child\n");
       int i = 0;
+      // detect special characters
       while (cmd[i]){
         if (strcmp(cmd[i],">") == 0){
           //printf("found >\n");
@@ -150,16 +156,21 @@ void execCommand(char **cmd){
         }
         system("git push");
       }
+
+      // pretty git log
       else if ((strcmp(cmd[0],"git") == 0) && (strcmp(cmd[1],"log") == 0)) {
         system("git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\"");
+        exit(0);
       }
+
+      // redirection
       else if (strcmp(special,">") == 0){
         //printf("> detected\n");
         int newOut = execRedirO(cmd);
         dup2(newOut, STDOUT_FILENO);
       }
       else if (strcmp(special,"<") == 0){
-        int newIn = execRedirI(cmd);
+        int newIn = execRedir1(cmd);
         dup2(newIn, STDIN_FILENO);
       }
       else if (strcmp(special,"|") == 0){
@@ -173,9 +184,9 @@ void execCommand(char **cmd){
       //resetFileTable(currentSTD_IN, currentSTD_OUT);
     }
     else {
+      //rintf("parent\n");
       int status;
       wait(&status);
-      exit(0);
     }
   }
 }

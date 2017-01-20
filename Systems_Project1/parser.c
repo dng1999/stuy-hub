@@ -24,7 +24,7 @@ char **parseCommand (char *cmd){
 
 char ***parseInput (char *input){
   char ***multi = (char ***)calloc(100,100);
-  
+
   int i = 0;
   while (input){
     multi[i] = parseCommand(strsep(&input, ";"));

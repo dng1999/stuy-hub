@@ -54,3 +54,12 @@ nancyC -- 12:08 PM
 dorothyN -- 3:40 PM
 	got networking to work so that only one client can run at a time
 	will upload later b/c merge conflicts over the horizon (my nemesis)
+
+dorothyN -- 6:52 PM
+	 still need to make it so that ./shm runs automatically
+	       will probably have prompt asking user if they want to shut down
+	       the server or not
+	 need to combine s3rver and networking folders
+	 need to combine ^^^ and shell
+	      command line = client
+	      execr.c = server processing

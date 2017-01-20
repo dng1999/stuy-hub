@@ -63,3 +63,8 @@ dorothyN -- 6:52 PM
 	 need to combine ^^^ and shell
 	      command line = client
 	      execr.c = server processing
+
+>>1/20/17
+
+nancyC -- 11:17 AM
+       git log doesn't require double exit now

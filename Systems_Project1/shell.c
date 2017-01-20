@@ -8,12 +8,14 @@
 #include "execr.h"
 
 static void sighandler (int signo) {
-    if (signo == SIGINT)
+    if (signo == SIGINT) {
+        //printf("sigExit\n");
         exit(0);
+      }
 }
 
 int main(){
-  printf("%s\n", "test");
+  //printf("%s\n", "test");
   signal(SIGINT, sighandler);
 
   char input[512];
@@ -26,8 +28,8 @@ int main(){
 
     int i = 0;
     for (;i<strlen(input);i++){
-      if (strcmp(&input[i],"\n") == 0){
-	input[i] = 0;
+      if (strcmp(&input[i],"\n") == 0) {
+	       input[i] = 0;
       }
     }
 
