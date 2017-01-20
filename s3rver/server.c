@@ -13,6 +13,8 @@ void sub_server( int sd );
 struct shmid_ds shminfo;
 
 int main() {
+  system("clear");
+  
   char buffer[MESSAGE_BUFFER_SIZE];
 
   //create shared memory
