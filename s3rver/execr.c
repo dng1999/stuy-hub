@@ -109,7 +109,6 @@ void execPipe(char **cmd){
 }
 
 //code below works
-int doubleExit = 0;
 
 void execCommand(char **cmd){
   if (strcmp(cmd[0],"exit") == 0){
