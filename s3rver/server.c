@@ -10,7 +10,7 @@
 #include "execr.h"
 #include "networking.h"
 
-void process( char * s );
+//void process( char * s );
 void sub_server( int sd );
 struct shmid_ds shminfo;
 
@@ -68,15 +68,17 @@ void sub_server( int sd ) {
     write (sd, buffer, sizeof(buffer));
     while (read( sd, buffer, sizeof(buffer) )) {
       printf("[SERVER %d] received: %s\n", getpid(), buffer );
-      process( buffer );
+      //process( buffer );
       write( sd, buffer, sizeof(buffer));
     }
   }
 
 }
+/*
 void process( char * s ) {
   while ( *s ) {
     char ***cmd = parseInput(s);
     execInput(cmd);
   }
 }
+*/

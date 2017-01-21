@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include "parser.h"
+#include "execr.h"
 #include "networking.h"
+void process( char * s );
 
 int main( int argc, char *argv[] ) {
   system("clear");
@@ -54,10 +56,20 @@ int main( int argc, char *argv[] ) {
     fgets( buffer, sizeof(buffer), stdin );
     char *p = strchr(buffer, '\n');
     *p = 0;
-
+    //printf("%s\n", buffer);
+    int x = 0;
+    process( buffer );
+    /*
     write( sd, buffer, sizeof(buffer) );
     read( sd, buffer, sizeof(buffer) );
     printf( "received: %s\n", buffer );
+    */
   }
+  // printf("test\n");
   return 0;
+}
+
+void process( char * s ) {
+    char ***cmd = parseInput(s);
+    execInput(cmd);
 }

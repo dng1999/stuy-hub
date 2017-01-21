@@ -3,8 +3,8 @@ compile: server client
 server: server.o networking.o execr.c parser.c
 	gcc -o server server.o networking.o execr.c  parser.c
 
-client: client.o networking.o parser.c
-	gcc -o client client.o networking.o parser.c
+client: client.o networking.o execr.c parser.c
+	gcc -o client client.o networking.o execr.c parser.c
 
 server.o: server.c networking.h execr.h
 	gcc -c server.c
