@@ -75,3 +75,10 @@ dorothyN -- 11:41 AM
 	 down server or not
 
 	 nancy wants to make client wait if too many clients
+
+>>1/21/17
+nancyC -- 9:31 AM
+       s3rver can compile!!
+       ascii art added
+       bug found: client doesn't exit when server exits
+       the execution of commands is displaying in server instead of client

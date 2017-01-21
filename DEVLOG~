@@ -63,3 +63,20 @@ dorothyN -- 6:52 PM
 	 need to combine ^^^ and shell
 	      command line = client
 	      execr.c = server processing
+
+>>1/20/17
+
+nancyC -- 11:17 AM
+       git log doesn't require double exit now
+
+dorothyN -- 11:41 AM
+	 combined shell and s3rver for the most part
+	 need to make it so that 'exit' prompts user input on whether to shut
+	 down server or not
+
+	 nancy wants to make client wait if too many clients
+
+>>1/21/17
+nancyC -- 9:31 AM
+       s3rver can compile!!
+       bug found: client doesn't exit when server exits
