@@ -79,4 +79,6 @@ dorothyN -- 11:41 AM
 >>1/21/17
 nancyC -- 9:31 AM
        s3rver can compile!!
+       ascii art added
        bug found: client doesn't exit when server exits
+       the execution of commands is displaying in server instead of client
