@@ -16,7 +16,7 @@ struct shmid_ds shminfo;
 
 int main() {
   system("clear");
-
+  printf("[server] started\n");
   char buffer[MESSAGE_BUFFER_SIZE];
 
   //create shared memory
