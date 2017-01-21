@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 
-int main() {
+void shmclear() {
 
   //create shared memory                                                        
   int key = ftok("makefile", 22);
@@ -12,5 +12,4 @@ int main() {
   int shmid = shmget(key, 4, IPC_CREAT|0644);
   int *len = shmat(shmid, NULL, 0);
   shmctl(shmid, IPC_RMID,NULL);
-  return 0;
 }

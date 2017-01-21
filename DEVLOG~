@@ -82,3 +82,6 @@ nancyC -- 9:31 AM
        ascii art added
        bug found: client doesn't exit when server exits
        the execution of commands is displaying in server instead of client
+
+nancyC -- 1:58 PM
+       execution code moved to client and works

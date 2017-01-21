@@ -58,6 +58,14 @@ int main( int argc, char *argv[] ) {
     *p = 0;
     //printf("%s\n", buffer);
     int x = 0;
+    if (strcmp(buffer,"exit") == 0){
+      printf("close server? (y/n): ");
+      fgets( buffer, sizeof(buffer), stdin);
+      if (strcmp(buffer, "y\n") == 0){
+	strcpy(buffer,"exit");
+	write( sd, buffer, sizeof(buffer) );
+      }
+    }
     process( buffer );
     /*
     write( sd, buffer, sizeof(buffer) );
@@ -70,6 +78,6 @@ int main( int argc, char *argv[] ) {
 }
 
 void process( char * s ) {
-    char ***cmd = parseInput(s);
-    execInput(cmd);
+  char ***cmd = parseInput(s);
+  execInput(cmd);
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -9,6 +10,7 @@
 #include "parser.h"
 #include "execr.h"
 #include "networking.h"
+#include "shmc.h"
 
 //void process( char * s );
 void sub_server( int sd );
@@ -68,6 +70,11 @@ void sub_server( int sd ) {
     write (sd, buffer, sizeof(buffer));
     while (read( sd, buffer, sizeof(buffer) )) {
       printf("[SERVER %d] received: %s\n", getpid(), buffer );
+      if (strcmp(buffer,"exit") == 0){
+	//printf("%d",getppid());
+	shmclear();
+	kill(getppid(),SIGINT);
+      }
       //process( buffer );
       write( sd, buffer, sizeof(buffer));
     }
