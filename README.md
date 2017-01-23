@@ -5,7 +5,7 @@ Members: Dorothy Ng, Nancy Cao
 
 1. make
 
-How To Use:
+## How To Use: ## 
 1. Run ./server in one terminal.
 2. Run ./client in another terminal. ./client <IP ADDRESS> if using networking.
 3. Use as normal shell. (Enter command HELP for information about what stuy-hub can do.)
