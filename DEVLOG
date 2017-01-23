@@ -7,7 +7,7 @@ format: firstL -- TIMESTAMP\n
 dorothyN -- 3:30 AM
 	wrote code for execPipe -> currently only tests to see if input is correct
 		need to add calls to execRedir later
-	      
+
 dorothyN -- 9:00 PM
 	fixed execPipe
 		still need to add calls to execRedir later (they're commented out until execRedir is working)
@@ -25,7 +25,7 @@ nancyC -- 11:23 PM
 dorothyN -- 11:43 AM
 	 actually fixed execPipe this time and will run on Mac OS. Not Linux. ???
 
->>1/16/17 
+>>1/16/17
 
 nancyC -- 11:01 PM
 	coded "git lazy <commit msg>" command that git add . -> git commit -m <commit msg> -> git push in one step
@@ -35,7 +35,7 @@ nancyC -- 11:01 PM
 >> 1/17/17
 
 nancyC -- 11:26 AM
-       fixed weird error - redirection now works on linux yay! 
+       fixed weird error - redirection now works on linux yay!
 
 >> 1/18/17
 
@@ -43,12 +43,12 @@ dorothyN -- 8:37 AM
 	 modified networking code to only accept one connection at a time
 	 issue: server shuts down when client shuts down
 	 	server has to be rerun after every session
-nancyC -- 12:08 PM 
+nancyC -- 12:08 PM
        fixed double exit bug
        git log is now reformatted to be clearer
        clear terminal when server or client is run
        added signal handling for Ctrl+C
-       
+
 >> 1/19/17
 
 dorothyN -- 3:40 PM
@@ -88,8 +88,8 @@ nancyC -- 1:58 PM
 
 dorothyN -- 6:35 PM
 	 when client exits, user has option to close server too
-	 bug: 
-	      [server] started
-	      -1
-	      [server bind] error 48: Address already in use
-	      happens when running server, running client 2x, exiting server, and restarting server.
+
+>>1/23/16 -- 6:52 PM
+	tested networking, works as far is I know
+	added HELP command
+	updated readme
