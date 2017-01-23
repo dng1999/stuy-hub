@@ -19,8 +19,8 @@ Members: Dorothy Ng, Nancy Cao
 - |
 
 #### SPECIAL COMMANDS: ####
-- git lazy [optional commit msg]  --  git add, git commit <msg>, and git push in one command\n");
-- git log  --  formatted and informative version of log\n\n");
+- git lazy [optional commit msg]  --  git add, git commit <msg>, and git push in one command
+- git log  --  formatted and informative version of log
 
 ## List of Files: ##
 #### C FILES ####
