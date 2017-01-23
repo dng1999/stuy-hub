@@ -54,8 +54,9 @@ int server_connect(int sd) {
 
 int client_connect( char *host , int pid) {
   int sd, i;
-
+  
   sd = socket( AF_INET, SOCK_STREAM, 0 );
+
   error_check( sd, "client socket" );
 
   struct sockaddr_in sock;

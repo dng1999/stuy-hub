@@ -16,9 +16,9 @@
 void sub_server( int sd , int num);
 struct shmid_ds shminfo;
 
-int num = 0;
 
 int main() {
+  int num = 0;
 
   system("clear");
   printf("[server] started\n");
@@ -26,7 +26,6 @@ int main() {
 
   //create shared memory
   int key = ftok("makefile", 22);
-
   int shmid = shmget(key, 4, IPC_CREAT|0644);
   int *len = shmat(shmid, NULL, 0);
   shmctl(shmid, IPC_STAT, &shminfo);
@@ -34,17 +33,17 @@ int main() {
   //create server
   int sd, connection;
   sd = server_setup();
+  num++;
+
   while (1) {
+
     connection = server_connect( sd );
 
     int f = fork();
-    num++;
-
     if (f == 0){
       close(sd);
       printf("num before sub server: %d\n", num);
       sub_server( connection, num );
-      num--;
       printf("num after sub server: %d\n", num);
       exit(0);
     }
@@ -67,7 +66,7 @@ void sub_server( int sd , int num ) {
   shmctl(shmid, IPC_STAT, &shminfo);
   //printf("attaches: %d\n",shminfo.shm_nattch);
 
-  if (num > 1){
+  if (shminfo.shm_nattch > 3){
     strcpy(buffer,"rejected");
     printf("Connection rejected. Too many clients.\n");
     write( sd, buffer, sizeof(buffer));
@@ -81,7 +80,6 @@ void sub_server( int sd , int num ) {
 	//printf("%d",getppid());
 	       shmclear();
 	        kill(getppid(),SIGINT);
-          num--;
       }
       //process( buffer );
       write( sd, buffer, sizeof(buffer));
