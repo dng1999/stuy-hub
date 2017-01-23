@@ -13,12 +13,11 @@
 #include "shmc.h"
 
 //void process( char * s );
-void sub_server( int sd , int num);
+void sub_server( int sd );
 struct shmid_ds shminfo;
 
 
 int main() {
-  int num = 0;
 
   system("clear");
   printf("[server] started\n");
@@ -33,7 +32,6 @@ int main() {
   //create server
   int sd, connection;
   sd = server_setup();
-  num++;
 
   while (1) {
 
@@ -42,9 +40,7 @@ int main() {
     int f = fork();
     if (f == 0){
       close(sd);
-      printf("num before sub server: %d\n", num);
-      sub_server( connection, num );
-      printf("num after sub server: %d\n", num);
+      sub_server( connection);
       exit(0);
     }
     else{
@@ -55,7 +51,7 @@ int main() {
 }
 
 
-void sub_server( int sd , int num ) {
+void sub_server( int sd ) {
 
   char buffer[MESSAGE_BUFFER_SIZE];
 
