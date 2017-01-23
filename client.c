@@ -47,6 +47,7 @@ int main( int argc, char *argv[] ) {
   }
 
   printf("Entered shell.\n");
+  printf("Type HELP for information on what stuy-hub can do.\n");
 
   char cwd[512];
 
@@ -63,7 +64,7 @@ int main( int argc, char *argv[] ) {
       fgets( buffer, sizeof(buffer), stdin);
       if (strcmp(buffer, "y\n") == 0){
 	       strcpy(buffer,"exit");
-	        write( sd, buffer, sizeof(buffer) );
+	       write( sd, buffer, sizeof(buffer) );
       }
     }
     process( buffer );

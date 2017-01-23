@@ -162,6 +162,25 @@ void execCommand(char **cmd){
         exit(0);
       }
 
+      else if (strcmp(cmd[0],"HELP") == 0) {
+
+        printf("\nABOUT STUY-HUB:\n");
+        printf("-----------------\n");
+        printf("stuy-hub is a custom-made shell for Github usage.\n");
+        printf("Only one user may run client shell at a time to prevent merge conflicts.\n");
+
+        printf("\nSUPPORTED REDIRECTION:\n");
+        printf("-----------------\n");
+        printf(">\n");
+        printf("<\n");
+        printf("||\n\n");
+
+        printf("SPECIAL COMMANDS:\n");
+        printf("-----------------\n");
+        printf("git lazy <optional commit msg>  --  git add, git commit <msg>, and git push in one command\n");
+        printf("git log  --  formatted and informative version of log\n\n");
+      }
+
       // redirection
       else if (strcmp(special,">") == 0){
         //printf("> detected\n");
