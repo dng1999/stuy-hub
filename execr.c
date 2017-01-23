@@ -167,7 +167,7 @@ void execCommand(char **cmd){
         printf("\nABOUT STUY-HUB:\n");
         printf("-----------------\n");
         printf("stuy-hub is a custom-made shell for Github usage.\n");
-        printf("Only one user may run client shell at a time to prevent merge conflicts.\n");
+        printf("Only one user may run stuy-hub at a time to prevent merge conflicts.\n");
 
         printf("\nSUPPORTED REDIRECTION:\n");
         printf("-----------------\n");

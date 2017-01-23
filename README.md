@@ -1,6 +1,10 @@
 # stuy-hub
 Members: Dorothy Ng, Nancy Cao
 
+## About ##
+stuy-hub is a custom-made shell for Github usage. It has built-in special commands to make Github easier to use.
+Only one user may access stuy-hub at a time to prevent merge conflicts from editing files.
+
 ## How To Compile: ##
 1. make
 
