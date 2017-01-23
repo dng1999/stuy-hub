@@ -7,7 +7,7 @@ Members: Dorothy Ng, Nancy Cao
 
 ## How To Use: ##
 1. Run ./server in one terminal.
-2. Run ./client in another terminal. ./client <IP ADDRESS> if using networking.
+2. Run ./client in another terminal. ./client [IP ADDRESS] if using networking.
 3. Use as normal shell. (Enter command HELP for information about what stuy-hub can do.)
 4. Exit client using EXIT command.
 5. make clean
@@ -19,7 +19,7 @@ Members: Dorothy Ng, Nancy Cao
 - |
 
 #### SPECIAL COMMANDS: ####
-- git lazy <optional commit msg>  --  git add, git commit <msg>, and git push in one command\n");
+- git lazy [optional commit msg]  --  git add, git commit <msg>, and git push in one command\n");
 - git log  --  formatted and informative version of log\n\n");
 
 ## List of Files: ##
