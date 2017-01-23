@@ -2,7 +2,6 @@
 Members: Dorothy Ng, Nancy Cao
 
 ## How To Compile: ##
-
 1. make
 
 ## How To Use: ##
@@ -23,7 +22,7 @@ Members: Dorothy Ng, Nancy Cao
 - git log  --  formatted and informative version of log
 
 ## List of Files: ##
-#### C FILES ####
+#### C Files ####
 - networking.c
 - client.c
 - server.c
