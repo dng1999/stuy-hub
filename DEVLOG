@@ -88,3 +88,8 @@ nancyC -- 1:58 PM
 
 dorothyN -- 6:35 PM
 	 when client exits, user has option to close server too
+	 bug: 
+	      [server] started
+	      -1
+	      [server bind] error 48: Address already in use
+	      happens when running server, running client 2x, exiting server, and restarting server.

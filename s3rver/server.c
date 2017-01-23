@@ -13,10 +13,13 @@
 #include "shmc.h"
 
 //void process( char * s );
-void sub_server( int sd );
+void sub_server( int sd , int num);
 struct shmid_ds shminfo;
 
+int num = 0;
+
 int main() {
+
   system("clear");
   printf("[server] started\n");
   char buffer[MESSAGE_BUFFER_SIZE];
@@ -28,18 +31,21 @@ int main() {
   int *len = shmat(shmid, NULL, 0);
   shmctl(shmid, IPC_STAT, &shminfo);
   //shmctl(shmid, IPC_RMID,0);
-
   //create server
   int sd, connection;
   sd = server_setup();
-
   while (1) {
     connection = server_connect( sd );
 
     int f = fork();
+    num++;
+
     if (f == 0){
       close(sd);
-      sub_server( connection );
+      printf("num before sub server: %d\n", num);
+      sub_server( connection, num );
+      num--;
+      printf("num after sub server: %d\n", num);
       exit(0);
     }
     else{
@@ -50,7 +56,8 @@ int main() {
 }
 
 
-void sub_server( int sd ) {
+void sub_server( int sd , int num ) {
+
   char buffer[MESSAGE_BUFFER_SIZE];
 
   int key = ftok("makefile", 22);
@@ -60,7 +67,7 @@ void sub_server( int sd ) {
   shmctl(shmid, IPC_STAT, &shminfo);
   //printf("attaches: %d\n",shminfo.shm_nattch);
 
-  if (shminfo.shm_nattch > 3){
+  if (num > 1){
     strcpy(buffer,"rejected");
     printf("Connection rejected. Too many clients.\n");
     write( sd, buffer, sizeof(buffer));
@@ -72,8 +79,9 @@ void sub_server( int sd ) {
       printf("[SERVER %d] received: %s\n", getpid(), buffer );
       if (strcmp(buffer,"exit") == 0){
 	//printf("%d",getppid());
-	shmclear();
-	kill(getppid(),SIGINT);
+	       shmclear();
+	        kill(getppid(),SIGINT);
+          num--;
       }
       //process( buffer );
       write( sd, buffer, sizeof(buffer));

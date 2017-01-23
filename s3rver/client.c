@@ -62,8 +62,8 @@ int main( int argc, char *argv[] ) {
       printf("close server? (y/n): ");
       fgets( buffer, sizeof(buffer), stdin);
       if (strcmp(buffer, "y\n") == 0){
-	strcpy(buffer,"exit");
-	write( sd, buffer, sizeof(buffer) );
+	       strcpy(buffer,"exit");
+	        write( sd, buffer, sizeof(buffer) );
       }
     }
     process( buffer );
