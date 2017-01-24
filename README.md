@@ -25,7 +25,7 @@ Only one user may access stuy-hub at a time to prevent merge conflicts from edit
 - git lazy [optional commit msg]  --  git add, git commit <msg>, and git push in one command
 - git log  --  formatted and informative version of log
 - EXIT -- exits client, and optionally, closes server
-- HELP -- prints info about client features
+- HELP -- prints info about stuy-hub features
 
 ## List of Files: ##
 #### C Files ####
